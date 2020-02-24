@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <string>
 using namespace std;
@@ -232,6 +230,28 @@ void open_not_close()
     dir = opendir("./");
     
 }
+
+
+int test_cppcheck(Data22 *pData)
+{
+    Data22 tmp(2012, 12, 02);
+    Data22 *tmp2 = &tmp;
+    int ret = tmp2->inf();
+    cout << "1:" << endl;
+
+    tmp2 = pData;
+   // tmp2 = nullptr;//
+    cout << "1-1:tmp2:" << tmp2 <<endl;
+    if(tmp2 != nullptr)
+    {
+        cout << "2:" << endl;
+        return 1;
+    }
+    cout << "3:tmp2:" << tmp2 <<endl;
+    tmp2->inf();
+    cout << "4:ret2:" << ret2 << endl;
+    return 2;
+}
  ///////////////////////////////////////////////////////////////////
 int main(void)
 {
@@ -241,7 +261,7 @@ int main(void)
  
     init_buffer();
     out_of_array();
-    open_not_close()
+    open_not_close();
 
 
 
@@ -269,11 +289,16 @@ int main(void)
     pData = nullptr;
     noob.TestNull(pData);
     cout << "6:next" << endl;
-
-
-    int aaa = pData->inf();
     
-
+    pData->inf();
+    
+    //////////////
+    Data22 tmp001(2012, 12, 02);
+    Data22 *pData001=&tmp001;
+    test_cppcheck(pData001);
+     
+    Data22 *pData002=nullptr;
+    test_cppcheck(pData002);
 
 
     return 0;
